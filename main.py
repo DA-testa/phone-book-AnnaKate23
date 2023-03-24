@@ -5,12 +5,23 @@ class Query:
     def __init__(self, query):
         self.type = query[0]
         self.number = int(query[1])
-        if self.type == 'add':
-            self.name = query[2]
+        if len(query[1]) <= 7:
+            if self.type == 'add':
+                self.name = query[2]
+                if len(query[2]) > 15:
+                    print ("wrong input")
+        else:
+            print("wrong input")
+            
+        
 
 def read_queries():
     n = int(input())
-    return [Query(input().split()) for i in range(n)]
+    if n < 1 or n > 10**5:
+        print("wrong input")
+    else:
+        return [Query(input().split()) for i in range(n)]
+        
 
 def write_responses(result):
     print('\n'.join(result))
@@ -35,11 +46,11 @@ def process_queries(queries):
     return result
 
 if __name__ == '__main__':
-    start_time = time.time()
+    start = time.time()
 
     write_responses(process_queries(read_queries()))
-    end_time = time.time()
-    print(end_time-start_time)
+    end = time.time()
+    print(end-start)
 
 
 
